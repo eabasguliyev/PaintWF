@@ -31,12 +31,12 @@ namespace PaintWF
         {
             this.PanelPaintArea = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ButtonClear = new System.Windows.Forms.Button();
-            this.PanelProperties = new System.Windows.Forms.Panel();
             this.ButtonSelectColor = new System.Windows.Forms.Button();
             this.PanelTools = new System.Windows.Forms.Panel();
             this.RadioButtonBrush = new System.Windows.Forms.RadioButton();
             this.RadioButtonPen = new System.Windows.Forms.RadioButton();
+            this.ButtonClear = new System.Windows.Forms.Button();
+            this.PanelProperties = new System.Windows.Forms.Panel();
             this.TextBoxHeight = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.TextBoxWidth = new System.Windows.Forms.TextBox();
@@ -47,8 +47,8 @@ namespace PaintWF
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
-            this.PanelProperties.SuspendLayout();
             this.PanelTools.SuspendLayout();
+            this.PanelProperties.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +67,8 @@ namespace PaintWF
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.ButtonSelectColor);
+            this.panel1.Controls.Add(this.PanelTools);
             this.panel1.Controls.Add(this.ButtonClear);
             this.panel1.Controls.Add(this.PanelProperties);
             this.panel1.Controls.Add(this.CheckBoxManual);
@@ -77,37 +79,13 @@ namespace PaintWF
             this.panel1.Size = new System.Drawing.Size(742, 66);
             this.panel1.TabIndex = 1;
             // 
-            // ButtonClear
-            // 
-            this.ButtonClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.ButtonClear.Location = new System.Drawing.Point(633, 5);
-            this.ButtonClear.Name = "ButtonClear";
-            this.ButtonClear.Size = new System.Drawing.Size(72, 57);
-            this.ButtonClear.TabIndex = 13;
-            this.ButtonClear.Text = "Clear";
-            this.ButtonClear.UseVisualStyleBackColor = true;
-            this.ButtonClear.Click += new System.EventHandler(this.ButtonClear_Click);
-            // 
-            // PanelProperties
-            // 
-            this.PanelProperties.Controls.Add(this.ButtonSelectColor);
-            this.PanelProperties.Controls.Add(this.PanelTools);
-            this.PanelProperties.Controls.Add(this.TextBoxHeight);
-            this.PanelProperties.Controls.Add(this.label2);
-            this.PanelProperties.Controls.Add(this.TextBoxWidth);
-            this.PanelProperties.Controls.Add(this.label1);
-            this.PanelProperties.Location = new System.Drawing.Point(244, 0);
-            this.PanelProperties.Name = "PanelProperties";
-            this.PanelProperties.Size = new System.Drawing.Size(383, 66);
-            this.PanelProperties.TabIndex = 8;
-            // 
             // ButtonSelectColor
             // 
             this.ButtonSelectColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.ButtonSelectColor.Location = new System.Drawing.Point(207, 5);
+            this.ButtonSelectColor.Location = new System.Drawing.Point(462, 5);
             this.ButtonSelectColor.Name = "ButtonSelectColor";
             this.ButtonSelectColor.Size = new System.Drawing.Size(72, 57);
-            this.ButtonSelectColor.TabIndex = 12;
+            this.ButtonSelectColor.TabIndex = 14;
             this.ButtonSelectColor.Text = "Color";
             this.ButtonSelectColor.UseVisualStyleBackColor = true;
             this.ButtonSelectColor.Click += new System.EventHandler(this.ButtonSelectColor_Click);
@@ -116,10 +94,10 @@ namespace PaintWF
             // 
             this.PanelTools.Controls.Add(this.RadioButtonBrush);
             this.PanelTools.Controls.Add(this.RadioButtonPen);
-            this.PanelTools.Location = new System.Drawing.Point(285, 6);
+            this.PanelTools.Location = new System.Drawing.Point(540, 6);
             this.PanelTools.Name = "PanelTools";
             this.PanelTools.Size = new System.Drawing.Size(86, 54);
-            this.PanelTools.TabIndex = 11;
+            this.PanelTools.TabIndex = 13;
             // 
             // RadioButtonBrush
             // 
@@ -136,6 +114,7 @@ namespace PaintWF
             // RadioButtonPen
             // 
             this.RadioButtonPen.AutoSize = true;
+            this.RadioButtonPen.Checked = true;
             this.RadioButtonPen.Location = new System.Drawing.Point(13, 5);
             this.RadioButtonPen.Name = "RadioButtonPen";
             this.RadioButtonPen.Size = new System.Drawing.Size(54, 21);
@@ -144,6 +123,28 @@ namespace PaintWF
             this.RadioButtonPen.Text = "Pen";
             this.RadioButtonPen.UseVisualStyleBackColor = true;
             this.RadioButtonPen.CheckedChanged += new System.EventHandler(this.RadioButtonPen_CheckedChanged);
+            // 
+            // ButtonClear
+            // 
+            this.ButtonClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.ButtonClear.Location = new System.Drawing.Point(633, 5);
+            this.ButtonClear.Name = "ButtonClear";
+            this.ButtonClear.Size = new System.Drawing.Size(72, 57);
+            this.ButtonClear.TabIndex = 13;
+            this.ButtonClear.Text = "Clear";
+            this.ButtonClear.UseVisualStyleBackColor = true;
+            this.ButtonClear.Click += new System.EventHandler(this.ButtonClear_Click);
+            // 
+            // PanelProperties
+            // 
+            this.PanelProperties.Controls.Add(this.TextBoxHeight);
+            this.PanelProperties.Controls.Add(this.label2);
+            this.PanelProperties.Controls.Add(this.TextBoxWidth);
+            this.PanelProperties.Controls.Add(this.label1);
+            this.PanelProperties.Location = new System.Drawing.Point(244, 0);
+            this.PanelProperties.Name = "PanelProperties";
+            this.PanelProperties.Size = new System.Drawing.Size(212, 66);
+            this.PanelProperties.TabIndex = 8;
             // 
             // TextBoxHeight
             // 
@@ -230,7 +231,7 @@ namespace PaintWF
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(123, 26);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -250,10 +251,10 @@ namespace PaintWF
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.PanelProperties.ResumeLayout(false);
-            this.PanelProperties.PerformLayout();
             this.PanelTools.ResumeLayout(false);
             this.PanelTools.PerformLayout();
+            this.PanelProperties.ResumeLayout(false);
+            this.PanelProperties.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -268,10 +269,6 @@ namespace PaintWF
         private System.Windows.Forms.ComboBox ComboBoxFigures;
         private System.Windows.Forms.Button ButtonClear;
         private System.Windows.Forms.Panel PanelProperties;
-        private System.Windows.Forms.Button ButtonSelectColor;
-        private System.Windows.Forms.Panel PanelTools;
-        private System.Windows.Forms.RadioButton RadioButtonBrush;
-        private System.Windows.Forms.RadioButton RadioButtonPen;
         private System.Windows.Forms.TextBox TextBoxHeight;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox TextBoxWidth;
@@ -280,6 +277,10 @@ namespace PaintWF
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.Button ButtonSelectColor;
+        private System.Windows.Forms.Panel PanelTools;
+        private System.Windows.Forms.RadioButton RadioButtonBrush;
+        private System.Windows.Forms.RadioButton RadioButtonPen;
     }
 }
 

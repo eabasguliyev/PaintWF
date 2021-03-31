@@ -17,6 +17,9 @@ namespace PaintWF
         private Pen _pen;
         private SolidBrush _solidBrush;
         private bool _isFilled;
+        private bool _manual;
+
+        private List<Point> Points { get; set; }
         public Form1()
         {
             InitializeComponent();
@@ -30,10 +33,12 @@ namespace PaintWF
             };
             ComboBoxFigures.DataSource = figures;
             ComboBoxFigures.SelectedIndex = 0;
+            Points = new List<Point>();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            CheckBoxManual.Checked = true;
             PanelTools.Enabled = false;
         }
 
@@ -115,7 +120,8 @@ namespace PaintWF
 
         private void CheckBoxManual_CheckedChanged(object sender, EventArgs e)
         {
-            PanelProperties.Enabled = !CheckBoxManual.Checked;
+            PanelProperties.Enabled = CheckBoxManual.Checked;
+            _manual = CheckBoxManual.Checked;
         }
 
         private void ButtonClear_Click(object sender, EventArgs e)
@@ -152,20 +158,75 @@ namespace PaintWF
 
         private void PanelPaintArea_MouseClick(object sender, MouseEventArgs e)
         {
-            var figureName = ComboBoxFigures.SelectedItem as string;
+            
+            
+            
 
-            var loc = e.Location;
-            var width = Convert.ToInt32(TextBoxWidth.Text);
-            var height = Convert.ToInt32(TextBoxHeight.Text);
+            if (_manual)
+            {
+                var figure = FigureCreator.CreateFigure();
 
-            var figure = FigureCreator.CreateFigure();
+                var figureName = ComboBoxFigures.SelectedItem as string;
+                var loc = e.Location;
 
-            figure.Name = figureName;
-            figure.Point = loc;
-            figure.Size = new Size(width, height);
-            figure.Color = _color;
-            figure.IsFilled = _isFilled;
-            Figures.Add(figure);
+                figure.Name = figureName;
+
+                var width = Convert.ToInt32(TextBoxWidth.Text);
+                var height = Convert.ToInt32(TextBoxHeight.Text);
+
+                figure.Point = loc;
+                figure.Size = new Size(width, height);
+                figure.Color = _color;
+                figure.IsFilled = _isFilled;
+
+                Figures.Add(figure);
+            }
+            else
+            {
+                if (Points.Count < 3)
+                {
+                    Points.Add(e.Location);
+
+                    if (Points.Count == 2)
+                    {
+                        var width = Points[1].X - Points[0].X;
+                        var height = Points[1].Y - Points[0].Y;
+
+                        var figure = FigureCreator.CreateFigure();
+
+                        var figureName = ComboBoxFigures.SelectedItem as string;
+
+                        figure.Name = figureName;
+                        figure.Color = _color;
+                        figure.IsFilled = _isFilled;
+
+                        Point loc = Point.Empty;
+                        if (width < 0 && height < 0)
+                        {
+                            loc = Points[1];
+                        }
+                        else if (width > 0 && height > 0)
+                        {
+                            loc = Points[0];
+                        }
+                        else if (width < 0 && height > 0)
+                        {
+                            loc = new Point(Points[0].X - Math.Abs(width), Points[0].Y);
+                        }
+                        else if (width > 0 && height < 0)
+                        {
+                            loc = new Point(Points[1].X - Math.Abs(width), Points[1].Y);
+                        }
+
+                        figure.Point = loc;
+
+                        figure.Size = new Size(Math.Abs(width), Math.Abs(height));
+                        Figures.Add(figure);
+                        Points.Clear();
+                    }
+                }
+            }
+
 
             this.Refresh();
         }

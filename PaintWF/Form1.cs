@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using PaintWF.Entities;
 using PaintWF.Helpers;
@@ -9,7 +10,7 @@ using Rectangle = PaintWF.Entities.Rectangle;
 
 namespace PaintWF
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form, IScreenShot
     {
         public ICreator FigureCreator { get; set; }
         public List<IFigure> Figures { get; set; }
@@ -158,10 +159,6 @@ namespace PaintWF
 
         private void PanelPaintArea_MouseClick(object sender, MouseEventArgs e)
         {
-            
-            
-            
-
             if (_manual)
             {
                 var figure = FigureCreator.CreateFigure();
@@ -235,17 +232,35 @@ namespace PaintWF
         {
             var save = new SaveFileDialog();
 
-            save.Filter = "Json files | *.json";
+            save.Filter = "Json files | *.json |Png files | *.png";
 
             if (save.ShowDialog() == DialogResult.Cancel)
                 return;
 
-            var fileName = save.FileName.EndsWith(".json") ? save.FileName : save.FileName + ".json";
+            var extension = Path.GetExtension(save.FileName);
+            var fileHelper = new FileHelper();
+            var safeName = fileHelper.GetSafeFileName(save.FileName, extension);
+
+            switch (extension.ToLower())
+            {
+                case ".json":
+                {
+                    var jsonHelper = new JsonHelper();
+
+                    jsonHelper.Serialize(safeName, Figures);
+                    break;
+                }
+                case ".png":
+                {
+                    var img = (Image)TakeScreenShot();
+
+                    img.Save(safeName);
+                    break;
+                }
+            }
 
 
-            var fileHelper = new JsonHelper();
-
-            fileHelper.Serialize(fileName, Figures);
+            
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -260,6 +275,13 @@ namespace PaintWF
             var fileHelper = new JsonHelper();
 
             Figures = fileHelper.Deserialize(open.FileName);
+        }
+
+        public Bitmap TakeScreenShot()
+        {
+            var screenShot = new ScreenShot();
+
+            return screenShot.TakeArea(PanelPaintArea);
         }
     }
 }

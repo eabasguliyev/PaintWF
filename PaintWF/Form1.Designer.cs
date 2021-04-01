@@ -46,6 +46,7 @@ namespace PaintWF
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PanelColorView = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.PanelTools.SuspendLayout();
             this.PanelProperties.SuspendLayout();
@@ -67,6 +68,7 @@ namespace PaintWF
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.PanelColorView);
             this.panel1.Controls.Add(this.ButtonSelectColor);
             this.panel1.Controls.Add(this.PanelTools);
             this.panel1.Controls.Add(this.ButtonClear);
@@ -81,10 +83,10 @@ namespace PaintWF
             // 
             // ButtonSelectColor
             // 
-            this.ButtonSelectColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.ButtonSelectColor.Location = new System.Drawing.Point(462, 5);
+            this.ButtonSelectColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.ButtonSelectColor.Location = new System.Drawing.Point(462, 4);
             this.ButtonSelectColor.Name = "ButtonSelectColor";
-            this.ButtonSelectColor.Size = new System.Drawing.Size(72, 57);
+            this.ButtonSelectColor.Size = new System.Drawing.Size(72, 29);
             this.ButtonSelectColor.TabIndex = 14;
             this.ButtonSelectColor.Text = "Color";
             this.ButtonSelectColor.UseVisualStyleBackColor = true;
@@ -235,6 +237,13 @@ namespace PaintWF
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
+            // PanelColorView
+            // 
+            this.PanelColorView.Location = new System.Drawing.Point(464, 34);
+            this.PanelColorView.Name = "PanelColorView";
+            this.PanelColorView.Size = new System.Drawing.Size(70, 28);
+            this.PanelColorView.TabIndex = 15;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -281,6 +290,7 @@ namespace PaintWF
         private System.Windows.Forms.Panel PanelTools;
         private System.Windows.Forms.RadioButton RadioButtonBrush;
         private System.Windows.Forms.RadioButton RadioButtonPen;
+        private System.Windows.Forms.Panel PanelColorView;
     }
 }
 

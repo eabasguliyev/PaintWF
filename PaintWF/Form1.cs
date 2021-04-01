@@ -143,6 +143,7 @@ namespace PaintWF
             if (colorDialog.ShowDialog() != DialogResult.Cancel)
             {
                 _color = colorDialog.Color;
+                PanelColorView.BackColor = _color;
                 PanelTools.Enabled = true;
             }
         }
